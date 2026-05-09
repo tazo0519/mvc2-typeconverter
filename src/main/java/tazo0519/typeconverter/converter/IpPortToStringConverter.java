@@ -9,7 +9,7 @@ public class IpPortToStringConverter implements Converter<IpPort, String> {
 
     @Override
     public String convert(IpPort source) {
-        log.info("Converting string to IpPort: {}", source);
+        log.info("Converting IpPort to string : {}", source);
         return source.getIp() + ":" + source.getPort();
     }
 }

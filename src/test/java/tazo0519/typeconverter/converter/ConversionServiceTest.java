@@ -1,0 +1,26 @@
+package tazo0519.typeconverter.converter;
+
+import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.springframework.core.convert.support.DefaultConversionService;
+import tazo0519.typeconverter.type.IpPort;
+
+class ConversionServiceTest {
+
+    @Test
+    void conversionService() {
+        DefaultConversionService conversionService = new DefaultConversionService();
+        conversionService.addConverter(new StringToIntegerConverter());
+        conversionService.addConverter(new IntegerToStringConverter());
+        conversionService.addConverter(new StringToIpPortConverter());
+        conversionService.addConverter(new IpPortToStringConverter());
+
+        Assertions.assertThat(conversionService.convert("10", Integer.class)).isEqualTo(10);
+        Assertions.assertThat(conversionService.convert(10, String.class)).isEqualTo("10");
+
+        IpPort ipPort = new IpPort("127.0.0.1", 8080);
+        String ipPortString = "127.0.0.1:8080";
+        Assertions.assertThat(conversionService.convert(ipPortString, IpPort.class)).isEqualTo(ipPort);
+        Assertions.assertThat(conversionService.convert(ipPort, String.class)).isEqualTo(ipPortString);
+    }
+}

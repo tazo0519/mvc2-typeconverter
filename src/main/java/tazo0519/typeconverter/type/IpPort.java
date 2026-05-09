@@ -2,9 +2,11 @@ package tazo0519.typeconverter.type;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
 @EqualsAndHashCode
+@ToString
 public class IpPort {
 
     private String ip;
